@@ -23,11 +23,10 @@ Jupyter Notebook, databazy, OpenPyxl, pandas, matplotlib
 1. Ubezpecte sa, ze mate poslednu verziu - spravte GIT PULL''' (sipka nadol)
 2. Skor ako zacnete robit zmeny musite sa odklonit do novej vetvy - GIT New Branch CheckOut(NAZOV SUBORU)
 3. Pridajte zmenene veci
-4. fd
-5. pravte Commit.
-4. GIT PUSH
-5. Spravte Pull Request (lista naboku) poslite ho majitelovi repozitara
-6. Ak budu zmeny prijate nastane Spojenie s hlavnou vetvou
-7. vratte sa do hlavnej vetvy
+4. pravte Commit.
+5. GIT PUSH
+6. Spravte Pull Request (lista naboku) poslite ho majitelovi repozitara
+7. Ak budu zmeny prijate nastane Spojenie s hlavnou vetvou
+8. vratte sa do hlavnej vetvy
 
 
