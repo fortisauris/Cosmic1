@@ -21,7 +21,8 @@ Jupyter Notebook, databazy, OpenPyxl, pandas, matplotlib
 # WORKFLOW  GITHUB.COM 
 
 1. Ubezpecte sa, ze mate poslednu verziu - spravte GIT PULL''' (sipka nadol)
-2. Skor ako zacnete robit zmeny musite sa odklonit do novej vetvy - GIT New Branch CheckOut(NAZOV SUBORU)
+2. Skor ako zacnete robit zmeny musite sa odklonit do novej vetvy - 
+Menu Pycharm: GIT>New Branch>CheckOut(NAZOV MENENEHO SUBORU)
 3. Pridajte zmenene veci
 4. Spravte Commit.
 5. GIT PUSH
