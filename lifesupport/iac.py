@@ -1,0 +1,1 @@
+# here will be IaC devices (thermostats, oxygen regulators, emergency system... etc.)
