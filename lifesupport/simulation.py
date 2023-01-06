@@ -3,6 +3,7 @@ import time
 import random
 import math
 from constructor import power, modules, doors
+from iac import thermostat,humistat,oxygen_regulator,carbon_regulator, pressure_check, ionizing_rad_check, fire_check, disconnect_check, disconnect_close_door
 
 # Settings
 simulation_speed = 1        # set the simulation "tick" speed in seconds, default = 1
@@ -27,6 +28,7 @@ SIMULATION LOOP     *runs indefinitely
 while True:             # infinite loop for simulation purposes
     time.sleep(0.1)     # infinite loop delay so weak PC's won't explode
     current_time = time.time()  # getting the current time for timers
+    power.consumption_reset()   # restarting consumption before every simulation loop
 
     # Orbiting / solar shadow and fuel burn simulation (using only one sinus wave, totally not scientifically accurate)
     if orbit:                                                           # happens only if orbit is True
@@ -57,17 +59,42 @@ while True:             # infinite loop for simulation purposes
             i.hum(loop_entropy)
             i.breathing(loop_entropy)
             for adj_list in i.adj_mod:              # additional loop for simulation of mixing air inbetween modules
-                temp = modules[adj_list].air[0]     # works based on adjacent_modules list for every module
-                hum = modules[adj_list].air[1]
-                hpa = modules[adj_list].air[2]
-                o2 = modules[adj_list].air[3]
-                co2 = modules[adj_list].air[4]
-                n2 = modules[adj_list].air[5]
-                usv = modules[adj_list].air[6]
-                i.mix(temp, hum, hpa, o2, co2, n2, usv)
+                if doors[1].status:                     # air is mixing only if doors are open
+                    temp = modules[adj_list].air[0]     # works based on adjacent_modules list for every module
+                    hum = modules[adj_list].air[1]
+                    hpa = modules[adj_list].air[2]
+                    o2 = modules[adj_list].air[3]
+                    co2 = modules[adj_list].air[4]
+                    n2 = modules[adj_list].air[5]
+                    usv = modules[adj_list].air[6]
+                    i.mix(temp, hum, hpa, o2, co2, n2, usv)
+
+        # IaC security functions (closing doors when needed)
+        for i in range(len(modules)):                           # using range(len( to parse a module id integer to IaC
+            pressure_check(modules[i].air_sensors(2), i)        # this has to be accounted for in here when calling func
+            ionizing_rad_check(modules[i].air_sensors(6), i)
+            fire_check(modules[i].fac, i)
+            disconnect_check()
+            disconnect_close_door(i)
+
 
         # IaC functions for modules (runs based on IaC)
-            #to be added if statements based on IaC code caling for devices and their power consumption
+        for i in modules:
+            if thermostat(i.air_sensors(0)):        # IaC function used as condition
+                i.heat(loop_entropy)                # turned heater on in simulation
+                power.consumption_on(100)           # added 100W to consumption in current run
+
+            if humistat(i.air_sensors(1)):          # similar as above but other devices...
+                i.dehum(loop_entropy)
+                power.consumption_on(50)
+
+            if oxygen_regulator(i.air_sensors(3)):
+                i.oxy_gen(loop_entropy)
+                power.consumption_on(50)
+
+            if carbon_regulator(i.air_sensors(4)):
+                i.carb_abs(loop_entropy)
+                power.consumption_on(20)
 
         # PowerFuel functions (runs always, some will be based on simulation inputs or IaC)
         power.solar(loop_entropy, orbit, solar_shadow)
@@ -107,7 +134,5 @@ while True:             # infinite loop for simulation purposes
                 print('{:.2f}'.format(modules[i].air_sensors(6)) + '\t\tμSv/h')
                 if modules[i].fire_sensors(): print("FAC status: FIRE !!!")
                 else: print("FAC status: OK")
-            print('____DOORS____')
-            print('no.   Belongs to      Adjacent to')
             for i in doors:
-                print(str(i.door_id) + '\t\t' + i.belongs_to + '\t\t\t' + i.adjacent_to)
+                print(str(i.door_id) + '\t\t' + i.belongs_to + '\t\t\t' + i.adjacent_to + '\t\t\t' + str(i.status) + '\t\t\t' + str(i.connection_status))

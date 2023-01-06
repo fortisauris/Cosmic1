@@ -31,7 +31,7 @@ DISCLAIMER: This in no way represents actual scientific calculations, constants 
 class Module (object):
 
     def __init__(self, module_name: str, module_size: float, module_weight: float, adjacent_modules: list, avg_crew: int, power_draw: float, lights_draw: float):
-        self.sim_const = 39                     # simulation constant (for speeding/slowing simulation calculations)
+        self.sim_const = 39                    # simulation constant (for speeding/slowing simulation calculations)
         self.name = module_name                 # module name (obviously)
         self.size = module_size                 # module size (used for hysteresis simulation value)
         self.weight = module_weight             # module weight
@@ -90,13 +90,15 @@ class Module (object):
         return
 
     def oxy_gen(self, entropy: float):  # oxygen generator
-        self.air[3] = self.air[3] + ((10 * entropy) / (self.size * self.sim_const))
-        self.air[2] = self.air[2] + ((5 * entropy) / (self.size * self.sim_const))
+        self.air[3] = self.air[3] + ((70 * entropy) / (self.size * self.sim_const))
+        # self.air[2] = self.air[2] + ((5 * entropy) / (self.size * self.sim_const))
         return
 
     def carb_abs(self, entropy: float):     # carbon dioxide absorber
-        self.air[4] = self.air[4] - ((10 * entropy) / (self.size * self.sim_const))
-        self.air[2] = self.air[2] - ((5 * entropy) / (self.size * self.sim_const))
+        self.air[4] = self.air[4] - ((30 * entropy) / (self.size * self.sim_const))
+        if self.air[4] <= 0:
+            self.air[4] = 0.01
+        # self.air[2] = self.air[2] - ((5 * entropy) / (self.size * self.sim_const))
         return
 
     # Sensors
@@ -159,9 +161,17 @@ class Door(object):
         self.belongs_to = belongs_to
         self.adjacent_to = adjacent_to
         self.status = True
+        self.connection_status = True
 
     def open(self):
         self.status = True
 
     def close(self):
         self.status = False
+
+    def connect(self):
+        self.status = True
+
+    def disconnect(self):
+        self.status = False
+

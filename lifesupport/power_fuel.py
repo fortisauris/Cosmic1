@@ -50,8 +50,8 @@ class PowerFuel (object):
         self.load = self.load + device_draw
         return
 
-    def consumption_off(self, device_draw: float):      # removes consumption from load value
-        self.load = self.load - device_draw
+    def consumption_reset(self):      # resets consumption for calculations
+        self.load = self.draw
         return
 
     # battery charging/discharging simulation (always call at the end of simulation loop !!!)

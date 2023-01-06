@@ -41,8 +41,8 @@ crew_members.append(Crewmate('Gordon', 172, 75))
 
 # Module input
 modules = list()
-modules.append(Module('Bridge', 35.5, 20.5, [1, 3], 2, 150.5, 54.6))
-modules.append(Module('Living', 55.5, 41.2, [0, 2], 4, 47.5, 112.7))
+modules.append(Module('Bridge', 35.5, 20.5, [1, 3], 2, 150.5, 54.6))    #[1, 3]
+modules.append(Module('Living', 55.5, 41.2, [0, 2], 4, 47.5, 112.7))   #[0, 2]
 modules.append(Module('Storage', 20.2, 12.4, [1], 1, 54.2, 21.6))
 modules.append(Module('BioLab', 45.5, 32.1, [0], 2, 21.5, 121.6))
 
@@ -61,6 +61,7 @@ for i in modules:
     for adj_list in i.adj_mod:
         door_counter = door_counter + 1
         doors.append(Door(door_counter, i.name, modules[adj_list].name))
+
 
 # Sum of parameters that apply to whole ship based on modules and crew
 ship_base_draw = 0
@@ -101,4 +102,4 @@ if constructor_print:
     print('____DOORS____')
     print('no.   Belongs to      Adjacent to')
     for i in doors:
-        print(str(i.door_id) + '\t\t' + i.belongs_to + '\t\t\t' + i.adjacent_to)
+        print(str(i.door_id) + '\t\t' + i.belongs_to + '\t\t\t' + i.adjacent_to + '\t\t\t' + str(i.status) + '\t\t\t' + str(i.connection_status))
