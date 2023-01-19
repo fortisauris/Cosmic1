@@ -2,8 +2,12 @@
 import time
 import random
 import math
+from data_logger import sensor_log_append, sensor_log_init
 from constructor import power, modules, doors
-from iac import thermostat,humistat,oxygen_regulator,carbon_regulator, pressure_check, ionizing_rad_check, fire_check, disconnect_check, disconnect_close_door
+from iac import thermostat, humistat, oxygen_regulator, carbon_regulator, pressure_check, ionizing_rad_check, fire_check, disconnect_check, disconnect_close_door
+
+# Start data logging
+sensor_log_init()
 
 # Settings
 simulation_speed = 1        # set the simulation "tick" speed in seconds, default = 1
@@ -106,6 +110,8 @@ while True:             # infinite loop for simulation purposes
         # power.consumption_on(100)     # starts using 100 W of power
         # power.emergency_battery()     # starts discharging emergency battery to meet power demand (counts on dead main battery)
 
+        # Data logging
+
         if test_print:
             print('')
             print('::::::::::::::::::::::::::::::::')
@@ -136,3 +142,6 @@ while True:             # infinite loop for simulation purposes
                 else: print("FAC status: OK")
             for i in doors:
                 print(str(i.door_id) + '\t\t' + i.belongs_to + '\t\t\t' + i.adjacent_to + '\t\t\t' + str(i.status) + '\t\t\t' + str(i.connection_status))
+
+
+        sensor_log_append()

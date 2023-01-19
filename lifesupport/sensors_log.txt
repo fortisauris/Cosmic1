@@ -1,0 +1,26 @@
+LIFE SUPPORT SYSTEMS ONLINE  1673533569.4976616
+BEGIN LOG 
+SPACESHIP: COSMIC1
+Raw weight: 106.43t 	Total weight: 113.43t
+__________________________________
+Module no.0  Bridge, 21.99, 40.01, 827.00, 21.00, 0.04, 78.00, 5.00, FAC status: OK
+Module no.1  Living, 22.00, 40.01, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Module no.2  Storage, 21.98, 40.01, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Module no.3  BioLab, 21.99, 40.01, 827.00, 21.00, 0.04, 78.00, 5.00, FAC status: OK
+Door no.0 Bridge/Living -> True, True
+Door no.1 Bridge/BioLab -> True, True
+Door no.2 Living/Bridge -> True, True
+Door no.3 Living/Storage -> True, True
+Door no.4 Storage/Living -> True, True
+Door no.5 BioLab/Bridge -> True, True
+__________________________________
+Module no.0  Bridge, 21.99, 40.01, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Module no.1  Living, 21.99, 40.02, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Module no.2  Storage, 21.97, 40.02, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Module no.3  BioLab, 21.99, 40.01, 827.00, 20.99, 0.05, 78.00, 5.00, FAC status: OK
+Door no.0 Bridge/Living -> True, True
+Door no.1 Bridge/BioLab -> True, True
+Door no.2 Living/Bridge -> True, True
+Door no.3 Living/Storage -> True, True
+Door no.4 Storage/Living -> True, True
+Door no.5 BioLab/Bridge -> True, True
